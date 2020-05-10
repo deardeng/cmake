@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.12)
+project(cmake3)
+
+add_definitions(-D_DPROJECT_NAME="${PROJECT_NAME}")
+set(BOOST_ROOT /home/dev/home/dev/puppy/install/x64-install/oss)
+find_package(Boost)
+if (${Boost_FOUND})
+    include_directories(${Boost_INCLUDE_DIRS})
+    add_definitions(-DBOOST)
+endif ()
+set(VERSION_MAJOR 2)
+set(VERSION_MINOR 1)
+configure_file(version.hpp.in
+        version.hpp @ONLY)
+message(STATUS "CMAKE_BINARY_DIR=${CMAKE_BINARY_DIR}")
+include_directories(${CMAKE_BINARY_DIR})
+set(CMAKE_CXX_STANDARD 14)
+add_executable(cmake3 main.cpp)
